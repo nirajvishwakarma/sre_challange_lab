@@ -1,0 +1,38 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+      - uses: actions/checkout@v5
+
+      - name: setup node.js
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '18.0.0'
+
+      - name: install dependencies
+        working-directory: codebase/rdicidr-0.1.0
+        run: npm ci
+      - name: run lint
+        working-directory: codebase/rdicidr-0.1.0
+        run: npm run lint
+      - name: run prettier
+        working-directory: codebase/rdicidr-0.1.0
+        run: npm run prettier
+      - name: run test
+        working-directory: codebase/rdicidr-0.1.0
+        run: CI=true npm test
+      - name: build
+        working-directory: codebase/rdicidr-0.1.0
+        run: npm run build

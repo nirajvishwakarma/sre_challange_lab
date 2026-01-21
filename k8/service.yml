@@ -1,16 +1,11 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: ingress-wildcard-host
+  name: app
 spec:
-  rules:
-  - host: "foo.bar.com"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/bar"
-        backend:
-          service:
-            name: service1
-            port:
-              number: 80
+  type: ClusterIP
+  selector:
+    app: app
+  ports:    
+    - port: 3000
+      targetPort: 3000

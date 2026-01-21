@@ -29,7 +29,7 @@ jobs:
         run: npm run lint
       - name: run prettier
         working-directory: codebase/rdicidr-0.1.0
-        run: npm run prettier
+        run: npm install -g prettier
       - name: run test
         working-directory: codebase/rdicidr-0.1.0
         run: CI=true npm test
